@@ -6,6 +6,7 @@ import { useRef } from 'react'
 import { useVirtualizer } from '@tanstack/react-virtual'
 
 import AnimatePortalSpinner from '@/components/molecules/animates/portal-spinner'
+import ScrollToTopButton from '@/components/molecules/buttons/scroll-top-button'
 import { useInfiniteVirtualScroll } from '@/hooks/useInfiniteVirtualScroll'
 
 interface VirtualizedListProps<T> {
@@ -50,52 +51,57 @@ export default function VirtualizedList<T>({
   })
 
   return (
-    <div
-      ref={parentRef}
-      className="mx-auto h-screen max-h-[600px] w-full overflow-auto"
-      style={{ contain: 'strict' }}
-      data-testid="virtualized-list-container"
-    >
+    // Wrapper div for relative positioning context
+    <div className="relative mx-auto h-screen max-h-[600px] w-full">
       <div
-        style={{
-          height: virtualizer.getTotalSize(),
-          width: '100%',
-          position: 'relative'
-        }}
+        ref={parentRef}
+        className="h-full w-full overflow-auto"
+        style={{ contain: 'strict' }}
+        data-testid="virtualized-list-container"
       >
-        {virtualItems.map((virtualItem) => {
-          const item = items[virtualItem.index]
+        <div
+          style={{
+            height: virtualizer.getTotalSize(),
+            width: '100%',
+            position: 'relative'
+          }}
+        >
+          {virtualItems.map((virtualItem) => {
+            const item = items[virtualItem.index]
 
-          return (
-            <div
-              key={virtualItem.key}
-              data-index={virtualItem.index}
-              ref={virtualizer.measureElement}
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                transform: `translateY(${virtualItem.start}px)`
-              }}
-            >
-              {renderItem(item, virtualItem.index)}
-            </div>
-          )
-        })}
+            return (
+              <div
+                key={virtualItem.key}
+                data-index={virtualItem.index}
+                ref={virtualizer.measureElement}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  transform: `translateY(${virtualItem.start}px)`
+                }}
+              >
+                {renderItem(item, virtualItem.index)}
+              </div>
+            )
+          })}
+        </div>
+
+        {isFetchingNextPage && (
+          <div className="flex w-full justify-center py-8">
+            <AnimatePortalSpinner width={100} height={100} />
+          </div>
+        )}
+
+        {!hasNextPage && items.length > 0 && (
+          <div className="flex w-full justify-center py-8">
+            <p className="text-sm text-gray-500">You've reached the end</p>
+          </div>
+        )}
       </div>
 
-      {isFetchingNextPage && (
-        <div className="flex w-full justify-center py-8">
-          <AnimatePortalSpinner width={100} height={100} />
-        </div>
-      )}
-
-      {!hasNextPage && items.length > 0 && (
-        <div className="flex w-full justify-center py-8">
-          <p className="text-sm text-gray-500">You've reached the end</p>
-        </div>
-      )}
+      <ScrollToTopButton containerRef={parentRef} virtualizer={virtualizer} />
     </div>
   )
 }

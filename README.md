@@ -1,4 +1,4 @@
-# Capco Assignment — Next.js App Router
+# Capco Assignment
 
 This project is a modern frontend application built with **Typescript** **Next.js (App Router)**, **React**, and **Tailwind CSS**.  
 It runs on **port 3000** by default and includes **Docker support** and **Cypress end-to-end testing**.
@@ -292,12 +292,11 @@ I had a clear vision from the start due to my prior experience with TanStack Rea
 
 **1. Quick Start & Boilerplate**
 - Generated initial component structures to save setup time
-- Requested TypeScript type definitions for API responses
 - Got starter configurations for TanStack Query and Virtual
 
 **2. Component Adjustments**
-- Asked for layout optimization suggestions when switching between list and grid views
-- Requested responsive design patterns for different breakpoints
+- Requested automated or architectural component optimization approaches without requiring manual refactoring efforts.
+-  Logic extraction into custom hooks after core page functionality is implemented, without requiring significant refactoring effort
 
 **3. Debugging & Problem-Solving**
 - **Key Example**: When grid view was fetching twice with the same `pageParams`, I consulted AI to understand the root cause
