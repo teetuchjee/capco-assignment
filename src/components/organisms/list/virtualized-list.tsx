@@ -60,6 +60,7 @@ export default function VirtualizedList<T>({
         data-testid="virtualized-list-container"
       >
         <div
+          suppressHydrationWarning
           style={{
             height: virtualizer.getTotalSize(),
             width: '100%',

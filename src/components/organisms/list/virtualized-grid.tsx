@@ -72,6 +72,7 @@ export default function VirtualizedGrid<T>({
         data-testid="virtualized-grid-container"
       >
         <div
+          suppressHydrationWarning
           style={{
             height: virtualizer.getTotalSize(),
             width: '100%',
