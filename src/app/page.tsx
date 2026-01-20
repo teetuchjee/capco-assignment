@@ -7,10 +7,12 @@ import { getCharacterList } from '@/services/character'
 export default async function HomePage() {
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery({
+  await queryClient.prefetchInfiniteQuery({
     queryKey: ['characters'],
-    queryFn: () => getCharacterList({ page: 1 })
+    queryFn: ({ pageParam = 1 }) => getCharacterList({ page: pageParam }),
+    initialPageParam: 1
   })
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Container className="flex flex-col items-center">
