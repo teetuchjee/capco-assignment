@@ -8,7 +8,7 @@ export default async function HomePage() {
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
-    queryKey: ['posts'],
+    queryKey: ['characters'],
     queryFn: () => getCharacterList({ page: 1 })
   })
   return (

@@ -1,27 +1,3 @@
-// import { useEffect } from 'react'
-// import type { VirtualItem } from '@tanstack/react-virtual'
-// interface Props {
-//   virtualItems: VirtualItem[]
-//   itemCount: number
-//   hasNextPage?: boolean
-//   isFetchingNextPage: boolean
-//   fetchNextPage: () => void
-// }
-// export function useInfiniteVirtualScroll({
-//   virtualItems,
-//   itemCount,
-//   hasNextPage,
-//   isFetchingNextPage,
-//   fetchNextPage
-// }: Props) {
-//   useEffect(() => {
-//     const lastItem = virtualItems.at(-1)
-//     if (!lastItem) return
-//     if (lastItem.index >= itemCount - 1 && hasNextPage && !isFetchingNextPage) {
-//       fetchNextPage()
-//     }
-//   }, [virtualItems, itemCount, hasNextPage, isFetchingNextPage, fetchNextPage])
-// }
 import { useEffect, useRef } from 'react'
 
 import type { VirtualItem } from '@tanstack/react-virtual'
